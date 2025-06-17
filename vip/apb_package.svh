@@ -8,6 +8,7 @@ package apb_package;
     `include "apb_config.sv"
     `include "apb_define.svh"
     `include "apb_if.sv"
+    `include "apb_seq_item.sv"
 
 endpackage
 
