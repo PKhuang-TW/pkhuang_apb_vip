@@ -58,22 +58,22 @@ This VIP supports the following features:
 ```
 apb_vip_project/
 │
-├─── README.md
+├── README.md
 │
 ├── block_diagram.png
 │
 ├── tb/
 │   └── tb_top.sv
 │
-├── rtl_stub/
+├── bfm/
 │   ├── apb_slave_bfm.sv
 │   └── apb_master_bfm.sv
 │
 ├── vip/
-│   ├── interface/
-│   │   └── apb_if.sv
+│   ├── apb_package.svh
 │   │
 │   ├── common/
+│   │   ├── apb_define.svh
 │   │   ├── apb_seq_item.sv
 │   │   ├── apb_config.sv
 │   │   ├── apb_driver_base.sv
@@ -93,15 +93,18 @@ apb_vip_project/
 │   │   ├── apb_master_coverage.sv
 │   │   └── apb_master_reg2bus_adapter.sv
 │   │
-│   └── slave/
-│       ├── apb_slave_driver.sv
-│       ├── apb_slave_monitor.sv
-│       ├── apb_slave_agent.sv
-│       ├── apb_slave_env.sv
-│       ├── apb_slave_sequence_lib.sv
-│       ├── apb_slave_scoreboard.sv
-│       ├── apb_slave_coverage.sv
-│       └── apb_slave_reg_model.sv
+│   ├── slave/
+│   │   ├── apb_slave_driver.sv
+│   │   ├── apb_slave_monitor.sv
+│   │   ├── apb_slave_agent.sv
+│   │   ├── apb_slave_env.sv
+│   │   ├── apb_slave_sequence_lib.sv
+│   │   ├── apb_slave_scoreboard.sv
+│   │   ├── apb_slave_coverage.sv
+│   │   └── apb_slave_reg_model.sv
+│   │
+│   ├── interface/
+│   │   └── apb_if.sv
 │
 ├── test/
 │   ├── master_tests/
