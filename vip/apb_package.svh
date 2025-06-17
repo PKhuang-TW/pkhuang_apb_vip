@@ -11,6 +11,8 @@ package apb_package;
     `include "apb_seq_item.sv"
     `include "apb_driver_base.sv"
     `include "apb_monitor_base.sv"
+    `include "apb_master_driver.sv"
+    `include "apb_master_monitor.sv"
 
 endpackage
 
