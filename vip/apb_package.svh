@@ -9,6 +9,8 @@ package apb_package;
     `include "apb_define.svh"
     `include "apb_if.sv"
     `include "apb_seq_item.sv"
+    `include "apb_driver_base.sv"
+    `include "apb_monitor_base.sv"
 
 endpackage
 
