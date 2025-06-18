@@ -13,6 +13,12 @@ package apb_package;
     `include "apb_monitor_base.sv"
     `include "apb_master_driver.sv"
     `include "apb_master_monitor.sv"
+    `include "apb_agent_base.sv"
+    `include "apb_master_agent.sv"
+    `include "apb_slave_agent.sv"
+    `include "apb_env_base.sv"
+    `include "apb_master_env.sv"
+    `include "apb_slave_env.sv"
 
 endpackage
 
