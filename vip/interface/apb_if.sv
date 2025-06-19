@@ -27,6 +27,50 @@ interface apb_if(
         input   PADDR, PWRITE, PSEL, PENABLE, PWDATA,
         output  PREADY, PRDATA
     );
+
+    task automatic apb_write (
+        input   logic                       sel,
+        input   logic [`D_ADDR_WIDTH-1:0]   addr,
+        input   logic [`D_DATA_WIDTH-1:0]   data
+    );
+        @ ( posedge PCLK );
+        PADDR   <= addr;
+        PSEL    <= sel;
+        PWDATA  <= data;
+        PWRITE  <= 1;
+
+        @ ( posedge PCLK );
+        PENABLE <= 1;
+
+        @ ( posedge PCLK );
+        @ ( posedge PREADY );
+        reset_signal();
+    endtask
+
+    task automatic apb_read (
+        input   logic                       sel,
+        input   logic [`D_ADDR_WIDTH-1:0]   addr
+    );
+        @ ( posedge PCLK );
+        PADDR   <= addr;
+        PSEL    <= sel;
+        PWRITE  <= 0;
+
+        @ ( posedge PCLK );
+        PENABLE <= 1;
+
+        @ ( posedge PCLK );
+        @ ( posedge PREADY );
+        reset_signal();
+    endtask
+    
+    task automatic reset_signal();
+        PADDR   <= '0;
+        PWRITE  <= '0;
+        PSEL    <= '0;
+        PENABLE <= '0;
+        PWDATA  <= '0;
+    endtask
 endinterface
 
 `endif

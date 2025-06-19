@@ -14,18 +14,19 @@ class apb_master_driver extends apb_driver_base;
             txn = apb_seq_item :: type_id :: create ("txn");
 
             seq_item_port.get_next_item(txn);
-            vif.PADDR   <= txn.PADDR;
-            vif.PWRITE  <= txn.PWRITE;
-            vif.PSEL    <= txn.PSEL;
-            vif.PWDATA  <= txn.PWDATA;
+            if ( txn.PWRITE ) begin
+                vif.apb_write (
+                    .sel ( txn.PSEL ),
+                    .addr ( txn.PADDR ),
+                    .data ( txn.PWDATA )
+                );
+            end else begin
+                vif.apb_read (
+                    .sel ( txn.PSEL ),
+                    .addr ( txn.PADDR )
+                );
+            end
             seq_item_port.item_done();
-
-            @ ( posedge vif.PCLK );
-            vif.PENABLE <= 1;
-
-            @ ( posedge vif.PCLK );
-            @ ( posedge vif.PREADY );
-            reset_signal();
         end
     endtask
 endclass

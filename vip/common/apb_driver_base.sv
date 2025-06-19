@@ -20,13 +20,6 @@ class apb_driver_base extends uvm_driver #(apb_seq_item);
             `uvm_fatal("NOCFG", $sformatf("No config set for %s.cfg", get_full_name() ))
         vif = cfg.vif;
     endfunction
-
-    virtual task reset_signal();
-        vif.PENABLE <= 0;
-        vif.PADDR   <= 0;
-        vif.PWRITE  <= 0;
-        vif.PSEL    <= 0;
-    endtask
 endclass
 
 `endif
