@@ -25,6 +25,8 @@ class apb_seq_item extends uvm_seq_item;
     `uvm_object_utils_end
 
     constraint psel_onhot_c { $onehot(PSEL); }
+    constraint addr_overflow_c { PADDR < `D_MEM_SIZE; }
+    constraint align_addr_to_width_c { PADDR % `D_DATA_WIDTH == 0; }
 
     function new ( string name = "apb_seq_item" );
         super.new(name);
