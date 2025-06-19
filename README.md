@@ -106,6 +106,10 @@ apb_vip_project/
 │   ├── interface/
 │   │   └── apb_if.sv
 │
+├── seq/
+│   ├── apb_master_basic_seq.sv
+│   └── apb_master_random_seq.sv
+│
 ├── test/
 │   ├── master_tests/
 │   │   ├── apb_master_basic_rw_test.sv
