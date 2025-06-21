@@ -3,14 +3,14 @@
 ## 🧩 Module Overview
 
 This VIP module implements a reusable Advanced Peripheral Bus (APB) Verification IP following the AMBA APB protocol specification.  
-It provides a complete UVM verification environment with layered base components, master and slave agents, register adapter support, and protocol functional coverage.
+It provides a complete UVM verification environment with layered base components, optional bus functional models (BFMs), master and slave agents, protocol timing assertions (SVA), and functional coverage.
 
 This VIP supports the following features:
 
 - Master transactions: APB read and write
-- Slave response: ready, valid data, error signal
+- Slave response: ready signal and valid data
 - Configurable setup and access phase timing
-- Register layer (RAL) adapter integration
+- Built-in SystemVerilog Assertions (SVA) for protocol timing checks
 - Random, directed, and corner-case test scenarios
 - Functional coverage for all phases and responses
 
@@ -29,48 +29,51 @@ This VIP supports the following features:
 | `PWDATA`   | Input     | Configurable | Write data bus                        |
 | `PRDATA`   | Output    | Configurable | Read data bus                         |
 | `PREADY`   | Output    | 1            | Ready signal                          |
-| `PSLVERR`  | Output    | 1            | Slave error response                  |
 
 ---
 
 ## 🔁 APB Protocol Behavior
 
 - **Setup Phase**:
-  - Master asserts `PSEL` with valid `PADDR`, `PWRITE`, `PWDATA` (for write) on rising edge of `PCLK`.
+  - Master asserts `PSEL` with valid `PADDR`, `PWRITE`, `PWDATA` (for write) on the rising edge of `PCLK`.
 
 - **Access Phase**:
   - Master asserts `PENABLE` while keeping `PSEL` high.
-  - Slave responds with `PREADY` and `PSLVERR`, and provides `PRDATA` for read.
+  - Slave responds with `PREADY` and provides `PRDATA` for read operations.
 
 - **Timing Control**:
   - Single setup and access phase; no burst support.
   - Ready signal may insert wait states.
 
-<!-- ---
-
-## 📷 APB Block Diagram
-
-![APB Block Diagram](doc/block_diagram.png) -->
-
 ---
+
+<!-- ## 📷 APB Block Diagram
+
+![APB Block Diagram](doc/block_diagram.png)
+
+--- -->
 
 ## 📁 Directory Structure
 ```
 apb_vip_project/
 │
 ├── README.md
-│
+|
 ├── block_diagram.png
 │
 ├── tb/
 │   └── tb_top.sv
 │
 ├── bfm/
-│   ├── apb_slave_bfm.sv
-│   └── apb_master_bfm.sv
+│   ├── apb_master_bfm.sv
+│   └── apb_slave_bfm.sv
 │
 ├── vip/
 │   ├── apb_package.svh
+│   │
+│   ├── interface/
+│   │   ├── apb_interface.sv
+│   │   └── apb_protocol_sva.sv
 │   │
 │   ├── common/
 │   │   ├── apb_define.svh
@@ -85,31 +88,26 @@ apb_vip_project/
 │   │
 │   ├── master/
 │   │   ├── apb_master_driver.sv
+│   │   ├── apb_master_driver_error.sv
 │   │   ├── apb_master_monitor.sv
 │   │   ├── apb_master_agent.sv
 │   │   ├── apb_master_env.sv
-│   │   ├── apb_master_sequence_lib.sv
 │   │   ├── apb_master_scoreboard.sv
-│   │   ├── apb_master_coverage.sv
-│   │   └── apb_master_reg2bus_adapter.sv
+│   │   └── apb_master_coverage.sv
 │   │
-│   ├── slave/
-│   │   ├── apb_slave_driver.sv
-│   │   ├── apb_slave_monitor.sv
-│   │   ├── apb_slave_agent.sv
-│   │   ├── apb_slave_env.sv
-│   │   ├── apb_slave_sequence_lib.sv
-│   │   ├── apb_slave_scoreboard.sv
-│   │   ├── apb_slave_coverage.sv
-│   │   └── apb_slave_reg_model.sv
-│   │
-│   └── interface/
-│       └── apb_interface.sv
-│
+│   └── slave/
+│       ├── apb_slave_driver.sv
+│       ├── apb_slave_monitor.sv
+│       ├── apb_slave_agent.sv
+│       ├── apb_slave_env.sv
+│       ├── apb_slave_scoreboard.sv
+│       └── apb_slave_coverage.sv
+│   
 ├── seq/
 │   ├── apb_master_basic_seq.sv
-│   └── apb_master_random_seq.sv
-│
+│   ├── apb_master_random_seq.sv
+│   └── apb_master_sequence_lib.sv
+│   
 └── test/
     ├── master_tests/
     │   ├── apb_master_basic_rw_test.sv
