@@ -3,7 +3,7 @@
 
 `include "apb_define.svh"
 
-class apb_seq_item extends uvm_seq_item;
+class apb_seq_item extends uvm_sequence_item;
     
     rand bit [`D_ADDR_WIDTH-1:0]    PADDR;
     rand bit                        PWRITE;
@@ -15,13 +15,13 @@ class apb_seq_item extends uvm_seq_item;
     bit [`D_DATA_WIDTH-1:0]         PRDATA;
 
     `uvm_object_utils_begin(apb_seq_item)
-        `uvm_field_int(PADDR)
-        `uvm_field_int(PWRITE)
-        `uvm_field_int(PSEL)
-        `uvm_field_int(PWDATA)
-        `uvm_field_int(PENABLE)
-        `uvm_field_int(PREADY)
-        `uvm_field_int(PRDATA)
+        `uvm_field_int(PADDR, UVM_ALL_ON)
+        `uvm_field_int(PWRITE, UVM_ALL_ON)
+        `uvm_field_int(PSEL, UVM_ALL_ON)
+        `uvm_field_int(PWDATA, UVM_ALL_ON)
+        `uvm_field_int(PENABLE, UVM_ALL_ON)
+        `uvm_field_int(PREADY, UVM_ALL_ON)
+        `uvm_field_int(PRDATA, UVM_ALL_ON)
     `uvm_object_utils_end
 
     constraint psel_onhot_c { $onehot(PSEL); }

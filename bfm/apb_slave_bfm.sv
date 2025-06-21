@@ -3,12 +3,13 @@
 
 `include "apb_define.svh"
 
-module apb_slave_bfm #(
-)(
+module apb_slave_bfm
+(
     input   logic       PCLK,
     input   logic       PRESETn,
-    inout   apb_if      vif
+    apb_if              vif
 );
+    
     logic [`D_DATA_WIDTH-1:0]       mem [`D_MEM_SIZE-1:0];
 
     initial begin
@@ -26,9 +27,9 @@ module apb_slave_bfm #(
                 vif.PREADY  <= 1;
 
                 if ( vif.PWRITE ) begin
-                    mem[vif.PADDR]  <= vif.PWDATA;
+                    mem[vif.PADDR[$clog2(`D_MEM_DEPTH)-1:0]] <= vif.PWDATA;
                 end else begin
-                    vif.PRDATA      <= mem[vif.PADDR];
+                    vif.PRDATA <= mem[vif.PADDR[$clog2(`D_MEM_DEPTH)-1:0]];
                 end
             end
         end

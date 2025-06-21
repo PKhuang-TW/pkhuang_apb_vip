@@ -1,11 +1,11 @@
 `ifndef APB_MASTER_BFM_SV
 `define APB_MASTER_BFM_SV
 
-module apb_master_bfm #(
-)(
+module apb_master_bfm
+(
     input   logic       PCLK,
     input   logic       PRESETn,
-    inout   apb_if      vif
+    apb_if              vif
 );
 
     initial begin

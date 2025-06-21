@@ -2,11 +2,12 @@
 `define APB_MASTER_BASIC_SEQ_SV
 
 class apb_master_basic_seq extends uvm_sequence #(apb_seq_item);
+    `uvm_object_utils(apb_master_basic_seq)
 
     apb_seq_item        txn;
 
-    function new ( string name = "apb_master_basic_seq", uvm_component parent );
-        super.new(name, parent);
+    function new ( string name = "apb_master_basic_seq" );
+        super.new(name);
     endfunction
 
     virtual task body();
