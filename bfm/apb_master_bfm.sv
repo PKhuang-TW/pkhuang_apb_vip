@@ -5,7 +5,7 @@ module apb_master_bfm
 (
     input   logic       PCLK,
     input   logic       PRESETn,
-    apb_if              vif
+    apb_interface       vif
 );
 
     initial begin
