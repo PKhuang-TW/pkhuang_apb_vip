@@ -9,8 +9,17 @@ class apb_master_agent extends apb_agent_base;
     endfunction
 
     function void build_phase ( uvm_phase phase );
-        factory.set_inst_override_by_name ( "apb_driver_base", "apb_master_driver", "drv" );
-        factory.set_inst_override_by_name ( "apb_monitor_base", "apb_master_monitor", "mon" );
+
+        factory.set_type_override_by_type (
+            apb_driver_base::get_type(),
+            apb_master_driver::get_type()
+        );
+
+        factory.set_type_override_by_type (
+            apb_monitor_base::get_type(),
+            apb_master_monitor::get_type()
+        );
+
         super.build_phase(phase);
     endfunction
 endclass

@@ -9,9 +9,22 @@ class apb_master_env extends apb_env_base;
     endfunction
 
     function void build_phase ( uvm_phase phase );
-        factory.set_type_override_by_name("apb_agent_base", "apb_master_agent");
-        // factory.set_type_override_by_name ( "apb_scoreboard_base", "apb_master_scoreboard");
-        // factory.set_type_override_by_name ( "apb_coverage_base", "apb_master_coverage");
+
+        factory.set_type_override_by_type(
+            apb_agent_base::get_type(),
+            apb_master_agent::get_type()
+        );
+
+        // factory.set_type_override_by_type (
+        //     apb_scoreboard_base::get_type(),
+        //     apb_master_scoreboard::get_type()
+        // );
+
+        // factory.set_type_override_by_type (
+        //     apb_coverage_base::get_type(),
+        //     apb_master_coverage::get_type()
+        // );
+
         super.build_phase(phase);
     endfunction
 endclass

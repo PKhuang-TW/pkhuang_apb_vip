@@ -1,8 +1,6 @@
 `ifndef APB_ENV_BASE_SV
 `define APB_ENV_BASE_SV
 
-`include "apb_define.svh"
-
 class apb_env_base extends uvm_env;
     `uvm_component_utils(apb_env_base)
 

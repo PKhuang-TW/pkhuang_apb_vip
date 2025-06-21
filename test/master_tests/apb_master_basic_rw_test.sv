@@ -29,6 +29,12 @@ class apb_master_basic_rw_test extends uvm_test;
         seq.start(env.agt_active.seqr);
         phase.drop_objection(this);
     endtask
+
+    function void end_of_elaboration_phase (uvm_phase phase);
+        super.end_of_elaboration_phase(phase);
+        uvm_top.print_topology();
+        uvm_factory::get().print();
+    endfunction
 endclass
 
 `endif
