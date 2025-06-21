@@ -3,6 +3,8 @@
 `include "apb_define.svh"
 `include "apb_if.sv"
 
+import uvm_pkg::*;
+
 `include "apb_package.svh"
 import apb_package::*;
 
