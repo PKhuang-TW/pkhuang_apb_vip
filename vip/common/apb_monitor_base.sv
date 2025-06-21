@@ -5,7 +5,7 @@ class apb_monitor_base extends uvm_monitor;
     `uvm_component_utils(apb_monitor_base)
 
     apb_config                          cfg;
-    virtual apb_if                      vif;
+    virtual apb_interface               vif;
 
     apb_seq_item                        txn;
 

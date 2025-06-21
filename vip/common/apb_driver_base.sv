@@ -4,8 +4,8 @@
 class apb_driver_base extends uvm_driver #(apb_seq_item);
     `uvm_component_utils(apb_driver_base)
 
-    apb_config          cfg;
-    virtual apb_if      vif;
+    apb_config              cfg;
+    virtual apb_interface   vif;
 
     apb_seq_item        txn;
 

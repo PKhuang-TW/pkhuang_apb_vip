@@ -7,7 +7,7 @@ module apb_slave_bfm
 (
     input   logic       PCLK,
     input   logic       PRESETn,
-    apb_if              vif
+    apb_interface       vif
 );
     
     logic [`D_DATA_WIDTH-1:0]       mem [`D_MEM_SIZE-1:0];

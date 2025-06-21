@@ -7,7 +7,7 @@ package apb_package;
     
     `include "apb_config.sv"
     `include "apb_define.svh"
-    `include "apb_if.sv"
+    `include "apb_interface.sv"
     `include "apb_seq_item.sv"
     `include "apb_driver_base.sv"
     `include "apb_monitor_base.sv"
@@ -19,7 +19,7 @@ package apb_package;
     `include "apb_env_base.sv"
     `include "apb_master_env.sv"
     `include "apb_slave_env.sv"
-    
+
     `include "apb_master_basic_seq.sv"
     `include "apb_master_basic_rw_test.sv"
 

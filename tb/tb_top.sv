@@ -1,7 +1,7 @@
 `timescale 1ps/1ps
 
 `include "apb_define.svh"
-`include "apb_if.sv"
+`include "apb_interface.sv"
 
 import uvm_pkg::*;
 
@@ -13,8 +13,8 @@ import apb_package::*;
 
 module tb_top;
 
-    logic       clk, rst_n;
-    apb_if      vif (clk, rst_n);
+    logic           clk, rst_n;
+    apb_interface   vif (clk, rst_n);
 
     apb_master_bfm mst (
         .PCLK   (clk),
@@ -32,7 +32,7 @@ module tb_top;
 
     initial begin
 
-        uvm_config_db #(virtual apb_if) :: set (null, "uvm_test_top", "vif", vif);
+        uvm_config_db #(virtual apb_interface) :: set (null, "uvm_test_top", "vif", vif);
 
         clk     = 0;
         rst_n   = 0;

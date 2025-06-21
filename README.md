@@ -103,24 +103,19 @@ apb_vip_project/
 │   │   ├── apb_slave_coverage.sv
 │   │   └── apb_slave_reg_model.sv
 │   │
-│   ├── interface/
-│   │   └── apb_if.sv
+│   └── interface/
+│       └── apb_interface.sv
 │
 ├── seq/
 │   ├── apb_master_basic_seq.sv
 │   └── apb_master_random_seq.sv
 │
-├── test/
-│   ├── master_tests/
-│   │   ├── apb_master_basic_rw_test.sv
-│   │   └── apb_master_error_test.sv
-│   │
-│   └── slave_tests/
-│       ├── apb_slave_basic_response_test.sv
-│       └── apb_slave_error_test.sv
-│
-└── sim/
-    ├── filelist.f
-    ├── Makefile
-    └── run.sh
+└── test/
+    ├── master_tests/
+    │   ├── apb_master_basic_rw_test.sv
+    │   └── apb_master_error_test.sv
+    │
+    └── slave_tests/
+        ├── apb_slave_basic_response_test.sv
+        └── apb_slave_error_test.sv
 ```

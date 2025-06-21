@@ -1,9 +1,9 @@
-`ifndef APB_IF_SV
-`define APB_IF_SV
+`ifndef APB_INTERFACE_SV
+`define APB_INTERFACE_SV
 
 `include "apb_define.svh"
 
-interface apb_if(
+interface apb_interface(
     input   PCLK,
     input   PRESETn
 );

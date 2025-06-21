@@ -18,7 +18,7 @@ class apb_master_basic_rw_test extends uvm_test;
         env = apb_master_env :: type_id :: create ("env", this);
         cfg = apb_config :: type_id :: create ("cfg");
 
-        if ( !uvm_config_db #(virtual apb_if) :: get (this, "", "vif", cfg.vif) )
+        if ( !uvm_config_db #(virtual apb_interface) :: get (this, "", "vif", cfg.vif) )
             `uvm_fatal ("NOVIF", $sformatf("No interface set for %s.vif", get_full_name()) )
         uvm_config_db #(apb_config) :: set (this, "*", "cfg", cfg);
     endfunction
