@@ -15,10 +15,10 @@ class apb_master_env extends apb_env_base;
             apb_master_agent::get_type()
         );
 
-        // factory.set_type_override_by_type (
-        //     apb_scoreboard_base::get_type(),
-        //     apb_master_scoreboard::get_type()
-        // );
+        factory.set_type_override_by_type (
+            apb_scoreboard_base::get_type(),
+            apb_master_scoreboard::get_type()
+        );
 
         // factory.set_type_override_by_type (
         //     apb_coverage_base::get_type(),
