@@ -26,7 +26,7 @@ class apb_master_driver extends apb_driver_base;
                 vif.PENABLE <= 1;
 
                 @ ( posedge vif.PCLK );
-                @ ( posedge vif.PREADY );
+                wait ( vif.PREADY );
                 vif.reset_signal();
                 
             end else begin  // APB read
@@ -39,7 +39,7 @@ class apb_master_driver extends apb_driver_base;
                 vif.PENABLE <= 1;
 
                 @ ( posedge vif.PCLK );
-                @ ( posedge vif.PREADY );
+                wait ( vif.PREADY );
                 vif.reset_signal();
             end
 

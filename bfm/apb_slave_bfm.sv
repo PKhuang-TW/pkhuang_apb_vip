@@ -21,9 +21,9 @@ module apb_slave_bfm
             vif.PRDATA  <= 0;
             vif.PREADY  <= 1;
         end else begin
-            if ( vif.PSEL && vif.PENABLE ) begin
+            if ( vif.PSEL && !vif.PENABLE) begin
                 vif.PREADY  <= 0;
-                @ ( posedge PCLK );  // simulate delay
+                #1;  // simulate delay
                 vif.PREADY  <= 1;
 
                 if ( vif.PWRITE ) begin
