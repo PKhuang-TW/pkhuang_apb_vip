@@ -27,9 +27,9 @@ module apb_slave_bfm
                 vif.PREADY  <= 1;
 
                 if ( vif.PWRITE ) begin
-                    mem[vif.PADDR[$clog2(`D_MEM_DEPTH)-1:0]] <= vif.PWDATA;
+                    mem[vif.PADDR[$clog2(`D_MEM_SIZE)-1:0]] <= vif.PWDATA;
                 end else begin
-                    vif.PRDATA <= mem[vif.PADDR[$clog2(`D_MEM_DEPTH)-1:0]];
+                    vif.PRDATA <= mem[vif.PADDR[$clog2(`D_MEM_SIZE)-1:0]];
                 end
             end
         end
