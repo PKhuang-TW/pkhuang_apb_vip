@@ -16,30 +16,30 @@ class apb_master_driver extends apb_driver_base;
             seq_item_port.get_next_item(txn);
 
             if ( txn.PWRITE ) begin  // APB write
-                @ ( posedge PCLK );
-                PADDR   <= addr;
-                PSEL    <= sel;
-                PWDATA  <= data;
-                PWRITE  <= 1;
+                @ ( posedge vif.PCLK );
+                vif.PADDR   <= txn.PADDR;
+                vif.PSEL    <= txn.PSEL;
+                vif.PWDATA  <= txn.PWDATA;
+                vif.PWRITE  <= 1;
 
-                @ ( posedge PCLK );
-                PENABLE <= 1;
+                @ ( posedge vif.PCLK );
+                vif.PENABLE <= 1;
 
-                @ ( posedge PCLK );
-                @ ( posedge PREADY );
+                @ ( posedge vif.PCLK );
+                @ ( posedge vif.PREADY );
                 vif.reset_signal();
                 
             end else begin  // APB read
-                @ ( posedge PCLK );
-                PADDR   <= addr;
-                PSEL    <= sel;
-                PWRITE  <= 0;
+                @ ( posedge vif.PCLK );
+                vif.PADDR   <= txn.PADDR;
+                vif.PSEL    <= txn.PSEL;
+                vif.PWRITE  <= 0;
 
-                @ ( posedge PCLK );
-                PENABLE <= 1;
+                @ ( posedge vif.PCLK );
+                vif.PENABLE <= 1;
 
-                @ ( posedge PCLK );
-                @ ( posedge PREADY );
+                @ ( posedge vif.PCLK );
+                @ ( posedge vif.PREADY );
                 vif.reset_signal();
             end
 
