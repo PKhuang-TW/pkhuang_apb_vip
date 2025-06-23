@@ -72,8 +72,11 @@ apb_vip_project/
 │   ├── apb_package.svh
 │   │
 │   ├── interface/
-│   │   ├── apb_interface.sv
-│   │   └── apb_protocol_sva.sv
+│   │   └── apb_interface.sv
+│   │
+│   ├── sva/
+│   │   ├── apb_protocol_sva.sv
+│   │   └── bin_apb_protocol_sva.sv
 │   │
 │   ├── common/
 │   │   ├── apb_define.svh
@@ -86,34 +89,19 @@ apb_vip_project/
 │   │   ├── apb_scoreboard_base.sv
 │   │   └── apb_coverage_base.sv
 │   │
-│   ├── master/
-│   │   ├── apb_master_driver.sv
-│   │   ├── apb_master_driver_error.sv
-│   │   ├── apb_master_monitor.sv
-│   │   ├── apb_master_agent.sv
-│   │   ├── apb_master_env.sv
-│   │   ├── apb_master_scoreboard.sv
-│   │   └── apb_master_coverage.sv
-│   │
-│   └── slave/
-│       ├── apb_slave_driver.sv
-│       ├── apb_slave_monitor.sv
-│       ├── apb_slave_agent.sv
-│       ├── apb_slave_env.sv
-│       ├── apb_slave_scoreboard.sv
-│       └── apb_slave_coverage.sv
+│   └── master/
+│       ├── apb_master_driver.sv
+│       ├── apb_master_driver_error.sv
+│       ├── apb_master_monitor.sv
+│       ├── apb_master_agent.sv
+│       ├── apb_master_env.sv
+│       ├── apb_master_scoreboard.sv
+│       └── apb_master_coverage.sv
 │   
 ├── seq/
-│   ├── apb_master_basic_seq.sv
-│   ├── apb_master_random_seq.sv
-│   └── apb_master_sequence_lib.sv
+│   └── apb_master_basic_seq.sv
 │   
 └── test/
-    ├── master_tests/
-    │   ├── apb_master_basic_rw_test.sv
-    │   └── apb_master_error_test.sv
-    │
-    └── slave_tests/
-        ├── apb_slave_basic_response_test.sv
-        └── apb_slave_error_test.sv
+    ├── apb_master_basic_rw_test.sv
+    └── apb_master_error_test.sv
 ```
