@@ -1,7 +1,9 @@
 `timescale 1ps/1ps
 
 `include "apb_define.svh"
+`include "apb_protocol_sva.sv"
 `include "apb_interface.sv"
+`include "bind_apb_protocol_sva.sv"
 
 import uvm_pkg::*;
 
