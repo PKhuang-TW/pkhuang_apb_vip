@@ -6,7 +6,7 @@ class apb_env_base extends uvm_env;
 
     apb_agent_base          agt_active, agt_passive;
     apb_scoreboard_base     scb;
-    // apb_coverage_base       cov;
+    apb_coverage_base       cov;
 
     function new ( string name = "apb_env_base", uvm_component parent );
         super.new(name, parent);
@@ -22,15 +22,18 @@ class apb_env_base extends uvm_env;
         agt_active = apb_agent_base :: type_id :: create ("agt_active", this);
         agt_passive = apb_agent_base :: type_id :: create ("agt_passive", this);
         scb = apb_scoreboard_base :: type_id :: create ("scb", this);
-        // cov = apb_coveraget_base :: type_id :: create ("cov", this);
+        cov = apb_coverage_base :: type_id :: create ("cov", this);
     endfunction
 
     function void connect_phase ( uvm_phase phase );
         super.connect_phase(phase);
-        // TODO
-        // SCB & COV connection
+
+        // SCB connection
         agt_active.mon.port.connect(scb.imp_active);
         agt_passive.mon.port.connect(scb.imp_passive);
+
+        // COV connection
+        agt_active.mon.port.connect(cov.analysis_export);
     endfunction
 endclass
 

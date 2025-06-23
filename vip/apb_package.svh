@@ -18,6 +18,8 @@ package apb_package;
     `include "apb_slave_agent.sv"
     `include "apb_scoreboard_base.sv"
     `include "apb_master_scoreboard.sv"
+    `include "apb_coverage_base.sv"
+    `include "apb_master_coverage.sv"
     `include "apb_env_base.sv"
     `include "apb_master_env.sv"
     `include "apb_slave_env.sv"
