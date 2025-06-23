@@ -1,15 +1,15 @@
-`ifndef APB_MASTER_BASIC_RW_TEST_SV
-`define APB_MASTER_BASIC_RW_TEST_SV
+`ifndef APB_BASIC_RW_TEST_SV
+`define APB_BASIC_RW_TEST_SV
 
-class apb_master_basic_rw_test extends uvm_test;
-    `uvm_component_utils(apb_master_basic_rw_test)
+class apb_basic_rw_test extends uvm_test;
+    `uvm_component_utils(apb_basic_rw_test)
 
     apb_master_env          env;
     apb_master_basic_seq    seq;
 
     apb_config              cfg;
 
-    function new ( string name = "apb_master_basic_rw_test", uvm_component parent );
+    function new ( string name = "apb_basic_rw_test", uvm_component parent );
         super.new(name, parent);
     endfunction
 
