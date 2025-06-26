@@ -5,7 +5,7 @@ class apb_basic_rw_test extends uvm_test;
     `uvm_component_utils(apb_basic_rw_test)
 
     apb_master_env          env;
-    apb_master_basic_seq    seq;
+    apb_basic_rw_seq    seq;
 
     apb_config              cfg;
 
@@ -25,7 +25,7 @@ class apb_basic_rw_test extends uvm_test;
 
     virtual task run_phase ( uvm_phase phase );
         phase.raise_objection(this);
-        seq = apb_master_basic_seq :: type_id :: create("seq");
+        seq = apb_basic_rw_seq :: type_id :: create("seq");
         seq.start(env.agt_active.seqr);
         phase.drop_objection(this);
     endtask

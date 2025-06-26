@@ -99,9 +99,9 @@ apb_vip_project/
 │       └── apb_master_coverage.sv
 │   
 ├── seq/
-│   └── apb_master_basic_seq.sv
+│   └── apb_basic_rw_seq.sv
 │   
 └── test/
-    ├── apb_master_basic_rw_test.sv
+    ├── apb_basic_rw_test.sv
     └── apb_master_error_test.sv
 ```
