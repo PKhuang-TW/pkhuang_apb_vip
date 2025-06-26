@@ -20,8 +20,10 @@ class apb_master_coverage extends apb_coverage_base;
     endfunction
     
     virtual function void write ( apb_seq_item t );
-        txn = t;
-        apb_cg.sample();
+        if ( t.PWRITE == 1 ) begin  // collects APB write only
+            txn = t;
+            apb_cg.sample();
+        end
     endfunction
 endclass
 

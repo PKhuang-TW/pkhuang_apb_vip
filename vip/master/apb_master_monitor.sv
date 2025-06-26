@@ -20,13 +20,14 @@ class apb_master_monitor extends apb_monitor_base;
                     txn.PWRITE  = vif.PWRITE;
                     txn.PSEL    = vif.PSEL;
                     txn.PWDATA  = vif.PWDATA;
+                    txn.PRDATA  = vif.PRDATA;
                     txn.PENABLE = vif.PENABLE;
                 end else begin  // agt_mode == UVM_PASSIVE
                     txn.PADDR   = vif.PADDR;
                     txn.PWRITE  = vif.PWRITE;
                     txn.PSEL    = vif.PSEL;
-                    txn.PRDATA  = vif.PRDATA;
                     txn.PENABLE = vif.PENABLE;
+                    txn.PRDATA  = vif.PRDATA;
                 end
 
                 port.write(txn);
