@@ -4,10 +4,8 @@
 class apb_basic_rw_test extends uvm_test;
     `uvm_component_utils(apb_basic_rw_test)
 
-    apb_master_env          env;
-    apb_basic_rw_seq    seq;
-
-    apb_config              cfg;
+    apb_env                     env;
+    apb_basic_rw_seq            seq;
 
     function new ( string name = "apb_basic_rw_test", uvm_component parent );
         super.new(name, parent);
@@ -15,18 +13,13 @@ class apb_basic_rw_test extends uvm_test;
 
     function void build_phase ( uvm_phase phase );
         super.build_phase(phase);
-        env = apb_master_env :: type_id :: create ("env", this);
-        cfg = apb_config :: type_id :: create ("cfg");
-
-        if ( !uvm_config_db #(virtual apb_interface) :: get (this, "", "vif", cfg.vif) )
-            `uvm_fatal ("NOVIF", $sformatf("No interface set for %s.vif", get_full_name()) )
-        uvm_config_db #(apb_config) :: set (this, "*", "cfg", cfg);
+        env = apb_env :: type_id :: create ("env", this);
     endfunction
 
     virtual task run_phase ( uvm_phase phase );
         phase.raise_objection(this);
         seq = apb_basic_rw_seq :: type_id :: create("seq");
-        seq.start(env.agt_active.seqr);
+        seq.start(env.agt_mst.seqr);
         phase.drop_objection(this);
     endtask
 

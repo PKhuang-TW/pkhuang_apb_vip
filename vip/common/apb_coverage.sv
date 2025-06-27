@@ -1,8 +1,12 @@
-`ifndef AGT_MASTER_COVERAGE_SV
-`define AGT_MASTER_COVERAGE_SV
+`ifndef AGT_COVERAGE_SV
+`define AGT_COVERAGE_SV
 
-class apb_master_coverage extends apb_coverage_base;
-    `uvm_component_utils(apb_master_coverage)
+`include "apb_define.svh"
+
+class apb_coverage extends uvm_subscriber #(apb_seq_item);
+    `uvm_component_utils(apb_coverage)
+
+    apb_seq_item        txn;
 
     covergroup apb_cg;
         cp_addr:    coverpoint  txn.PADDR { 
@@ -14,7 +18,7 @@ class apb_master_coverage extends apb_coverage_base;
         addr_X_op_X_sel:    cross cp_addr, cp_op, cp_sel;
     endgroup
 
-    function new ( string name = "apb_master_coverage", uvm_component parent );
+    function new ( string name = "apb_coverage", uvm_component parent );
         super.new(name, parent);
         apb_cg = new();
     endfunction

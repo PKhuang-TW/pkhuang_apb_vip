@@ -27,14 +27,6 @@ interface apb_interface(
         input   PADDR, PWRITE, PSEL, PENABLE, PWDATA,
         output  PREADY, PRDATA
     );
-    
-    task automatic reset_signal();
-        PADDR   <= '0;
-        PWRITE  <= '0;
-        PSEL    <= '0;
-        PENABLE <= '0;
-        PWDATA  <= '0;
-    endtask
 endinterface
 
 `endif

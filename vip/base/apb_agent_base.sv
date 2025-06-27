@@ -20,7 +20,7 @@ class apb_agent_base extends uvm_agent;
         if ( !uvm_config_db #(uvm_active_passive_enum) :: get (this, "", "agt_mode", agt_mode) )
             `uvm_fatal("NOAGTMODE", $sformatf("No agt_mode set for %s.agt_mode", get_full_name() ))
 
-        uvm_config_db #(uvm_active_passive_enum) :: set (this, "mon", "agt_mode", agt_mode);
+        uvm_config_db #(uvm_active_passive_enum) :: set (this, "*", "agt_mode", agt_mode);
 
         mon = apb_monitor_base :: type_id :: create ("mon", this);
 

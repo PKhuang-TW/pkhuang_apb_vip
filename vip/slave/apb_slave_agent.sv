@@ -1,10 +1,10 @@
-`ifndef APB_MASTER_AGENT_SV
-`define APB_MASTER_AGENT_SV
+`ifndef APB_SLAVE_AGENT_SV
+`define APB_SLAVE_AGENT_SV
 
-class apb_master_agent extends apb_agent_base;
-    `uvm_component_utils(apb_master_agent)
+class apb_slave_agent extends apb_agent_base;
+    `uvm_component_utils(apb_slave_agent)
 
-    function new ( string name = "apb_master_agent", uvm_component parent );
+    function new ( string name = "apb_slave_agent", uvm_component parent );
         super.new(name, parent);
     endfunction
 
@@ -12,14 +12,14 @@ class apb_master_agent extends apb_agent_base;
 
         factory.set_inst_override_by_type (
             apb_driver_base::get_type(),
-            apb_master_driver::get_type(),
-            "*agt_mst.*"
+            apb_slave_driver::get_type(),
+            "*agt_slv.*"
         );
 
         factory.set_inst_override_by_type (
             apb_monitor_base::get_type(),
-            apb_master_monitor::get_type(),
-            "*agt_mst.*"
+            apb_slave_monitor::get_type(),
+            "*agt_slv.*"
         );
 
         super.build_phase(phase);

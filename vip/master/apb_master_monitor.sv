@@ -14,22 +14,12 @@ class apb_master_monitor extends apb_monitor_base;
 
             if ( vif.PSEL && vif.PENABLE && vif.PREADY ) begin
                 txn = apb_seq_item :: type_id :: create ("txn");
-
-                if ( agt_mode == UVM_ACTIVE ) begin
-                    txn.PADDR   = vif.PADDR;
-                    txn.PWRITE  = vif.PWRITE;
-                    txn.PSEL    = vif.PSEL;
-                    txn.PWDATA  = vif.PWDATA;
-                    txn.PRDATA  = vif.PRDATA;
-                    txn.PENABLE = vif.PENABLE;
-                end else begin  // agt_mode == UVM_PASSIVE
-                    txn.PADDR   = vif.PADDR;
-                    txn.PWRITE  = vif.PWRITE;
-                    txn.PSEL    = vif.PSEL;
-                    txn.PENABLE = vif.PENABLE;
-                    txn.PRDATA  = vif.PRDATA;
-                end
-
+                txn.PADDR   = vif.PADDR;
+                txn.PWRITE  = vif.PWRITE;
+                txn.PSEL    = vif.PSEL;
+                txn.PWDATA  = vif.PWDATA;
+                txn.PRDATA  = vif.PRDATA;
+                txn.PENABLE = vif.PENABLE;
                 port.write(txn);
             end
         end
