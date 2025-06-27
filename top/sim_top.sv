@@ -16,13 +16,15 @@ import apb_package::*;
 module sim_top;
 
     logic           clk, rst_n;
-    apb_interface   vif (clk, rst_n);
+    apb_interface   vif();
 
     // apb_master_bfm mst (
     //     .PCLK   (clk),
     //     .PRESETn(rst_n),
     //     .vif    (vif)
     // );
+    assign vif.PCLK     = clk;
+    assign vif.PRESETn  = rst_n;
 
     // apb_slave_bfm slv (
     //     .PCLK   (clk),
@@ -33,6 +35,10 @@ module sim_top;
     always  #5  clk = ~clk;
 
     initial begin
+        run_test();
+    end
+
+    initial begin
 
         uvm_config_db #(virtual apb_interface) :: set (null, "*", "vif", vif);
 
@@ -41,8 +47,6 @@ module sim_top;
 
         #10;
         rst_n   = 1;
-
-        run_test();
     end
 
     initial begin

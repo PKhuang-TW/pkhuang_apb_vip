@@ -3,10 +3,11 @@
 
 `include "apb_define.svh"
 
-interface apb_interface(
-    input   PCLK,
-    input   PRESETn
-);
+interface apb_interface;
+
+    logic                           PCLK;
+    logic                           PRESETn;
+
     // Master Signal
     logic [`D_ADDR_WIDTH-1:0]       PADDR;
     logic                           PWRITE;
@@ -20,11 +21,11 @@ interface apb_interface(
 
     modport master (
         output  PADDR, PWRITE, PSEL, PENABLE, PWDATA,
-        input   PREADY, PRDATA
+        input   PREADY, PRDATA, PCLK, PRESETn
     );
 
     modport slave (
-        input   PADDR, PWRITE, PSEL, PENABLE, PWDATA,
+        input   PADDR, PWRITE, PSEL, PENABLE, PWDATA, PCLK, PRESETn,
         output  PREADY, PRDATA
     );
 endinterface
