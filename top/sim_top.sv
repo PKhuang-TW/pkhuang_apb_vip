@@ -10,7 +10,6 @@ import uvm_pkg::*;
 `include "apb_package.svh"
 import apb_package::*;
 
-// `include "apb_master_bfm.sv"
 // `include "apb_slave_bfm.sv"
 
 module sim_top;
@@ -18,11 +17,6 @@ module sim_top;
     logic           clk, rst_n;
     apb_interface   vif();
 
-    // apb_master_bfm mst (
-    //     .PCLK   (clk),
-    //     .PRESETn(rst_n),
-    //     .vif    (vif)
-    // );
     assign vif.PCLK     = clk;
     assign vif.PRESETn  = rst_n;
 
