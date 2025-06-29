@@ -5,7 +5,8 @@ class apb_basic_rw_test extends uvm_test;
     `uvm_component_utils(apb_basic_rw_test)
 
     apb_env                     env;
-    apb_basic_rw_seq            seq;
+    apb_master_seq              mst_seq;
+    apb_slave_seq               slv_seq;
 
     function new ( string name = "apb_basic_rw_test", uvm_component parent );
         super.new(name, parent);
@@ -18,8 +19,20 @@ class apb_basic_rw_test extends uvm_test;
 
     virtual task run_phase ( uvm_phase phase );
         phase.raise_objection(this);
-        seq = apb_basic_rw_seq :: type_id :: create("seq");
-        seq.start(env.agt_mst.seqr);
+
+        mst_seq = apb_master_seq :: type_id :: create("mst_seq");
+        slv_seq = apb_slave_seq :: type_id :: create("slv_seq");
+        fork
+            begin
+                mst_seq.start(env.agt_mst.seqr);
+                #50ps;
+            end
+            begin
+                // will be waiting for req forever
+                slv_seq.start(env.agt_slv.seqr);
+            end
+        join_any
+        disable fork;
         phase.drop_objection(this);
     endtask
 

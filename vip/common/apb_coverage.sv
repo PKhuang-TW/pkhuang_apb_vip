@@ -24,9 +24,11 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
     endfunction
     
     virtual function void write ( apb_seq_item t );
-        if ( t.PWRITE == 1 ) begin  // collects APB write only
-            txn = t;
-            apb_cg.sample();
+        if ( t.PSEL && t.PENABLE && t.PREADY ) begin  // TXN completes
+            if ( t.PWRITE == 1 ) begin  // collects APB write only
+                txn = t;
+                apb_cg.sample();
+            end
         end
     endfunction
 endclass

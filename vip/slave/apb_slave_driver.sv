@@ -22,19 +22,18 @@ class apb_slave_driver extends apb_driver_base;
                 vif.PRDATA  <= 0;
                 vif.PREADY  <= 1;
             end else begin
-                txn = apb_seq_item :: type_id :: create ("txn");
-
-                if ( vif.PSEL && !vif.PENABLE) begin
+                seq_item_port.get_next_item(txn);
+                if ( txn.PSEL && !txn.PENABLE ) begin  // Setup Phase
                     vif.PREADY  <= 0;
                     #1;  // simulate delay
                     vif.PREADY  <= 1;
-
-                    if ( vif.PWRITE ) begin
-                        mem[vif.PADDR[$clog2(`D_MEM_SIZE)-1:0]] <= vif.PWDATA;
+                    if ( txn.PWRITE ) begin
+                        mem[txn.PADDR[$clog2(`D_MEM_SIZE)-1:0]] <= txn.PWDATA;
                     end else begin
-                        vif.PRDATA <= mem[vif.PADDR[$clog2(`D_MEM_SIZE)-1:0]];
+                        vif.PRDATA <= mem[txn.PADDR[$clog2(`D_MEM_SIZE)-1:0]];
                     end
                 end
+                seq_item_port.item_done();
             end
         end
     endtask

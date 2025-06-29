@@ -1,12 +1,12 @@
-`ifndef APB_BASIC_RW_SEQ_SV
-`define APB_BASIC_RW_SEQ_SV
+`ifndef APB_MASTER_SEQ_SV
+`define APB_MASTER_SEQ_SV
 
-class apb_basic_rw_seq extends uvm_sequence #(apb_seq_item);
-    `uvm_object_utils(apb_basic_rw_seq)
+class apb_master_seq extends uvm_sequence #(apb_seq_item);
+    `uvm_object_utils(apb_master_seq)
 
     apb_seq_item        txn;
 
-    function new ( string name = "apb_basic_rw_seq" );
+    function new ( string name = "apb_master_seq" );
         super.new(name);
     endfunction
 

@@ -11,8 +11,7 @@ class apb_master_monitor extends apb_monitor_base;
     virtual task run_phase ( uvm_phase phase );
         forever begin
             @ ( posedge vif.PCLK );
-
-            if ( vif.PSEL && vif.PENABLE && vif.PREADY ) begin
+            if ( vif.PSEL ) begin  // Write whenever PSEL != 0
                 txn = apb_seq_item :: type_id :: create ("txn");
                 txn.PADDR   = vif.PADDR;
                 txn.PWRITE  = vif.PWRITE;
