@@ -2,17 +2,22 @@
 
 ## 🧩 Module Overview
 
-This VIP module implements a reusable Advanced Peripheral Bus (APB) Verification IP following the AMBA APB protocol specification.  
-It provides a complete UVM verification environment with layered base components, optional bus functional models (BFMs), master and slave agents, protocol timing assertions (SVA), and functional coverage.
+This project implements a configurable and reusable APB (Advanced Peripheral Bus) UVM Verification IP based on the AMBA® APB protocol specification (IHI 0024E).  
+It supports three modes of operation — **master VIP**, **slave VIP**, and **loopback testbench** — through flexible configuration.
 
-This VIP supports the following features:
+The VIP includes layered base components, driver/monitor/sequencer agents, protocol timing assertions (SystemVerilog Assertions), optional bus functional models (BFMs), and reference model support.  
+It is designed to validate both master and slave DUTs by instantiating the corresponding passive or active agent, and can be used for directed or random stimulus generation.
 
-- Master transactions: APB read and write
-- Slave response: ready signal and valid data
+### Supported Features
+
+- APB master transactions: read/write stimulus generation
+- APB slave response handling: data return and memory emulation
 - Configurable setup and access phase timing
+- Loopback test support between master and slave agents
 - Built-in SystemVerilog Assertions (SVA) for protocol timing checks
-- Random, directed, and corner-case test scenarios
-- Functional coverage for all phases and responses
+- UVM scoreboard and passive agent monitoring support
+- Functional coverage for read/write address, data, and control signals
+- Optional BFMs for standalone integration without UVM
 
 ---
 
@@ -55,53 +60,49 @@ This VIP supports the following features:
 
 ## 📁 Directory Structure
 ```
-apb_vip_project/
-│
-├── README.md
-|
-├── block_diagram.png
-│
-├── tb/
-│   └── tb_top.sv
-│
+PKHUANG_APB_VIP/
 ├── bfm/
-│   ├── apb_master_bfm.sv
 │   └── apb_slave_bfm.sv
 │
+├── seq/
+│   └── apb_mater_seq.sv
+│
+├── test/
+│   └── apb_basic_rw_test.sv
+│
+├── top/
+│   └── sim_top.sv
+│
 ├── vip/
-│   ├── apb_package.svh
+│   ├── base/
+│   │   ├── apb_agent_base.sv
+│   │   ├── apb_driver_base.sv
+│   │   └── apb_monitor_base.sv
+│   │
+│   ├── common/
+│   │   ├── apb_coverage.sv
+│   │   ├── apb_define.svh
+│   │   ├── apb_env.sv
+│   │   ├── apb_package.svh
+│   │   ├── apb_scoreboard.sv
+│   │   └── apb_seq_item.sv
 │   │
 │   ├── interface/
 │   │   └── apb_interface.sv
 │   │
-│   ├── sva/
-│   │   ├── apb_protocol_sva.sv
-│   │   └── bin_apb_protocol_sva.sv
+│   ├── master/
+│   │   ├── apb_master_agent.sv
+│   │   ├── apb_master_driver.sv
+│   │   └── apb_master_monitor.sv
 │   │
-│   ├── common/
-│   │   ├── apb_define.svh
-│   │   ├── apb_seq_item.sv
-│   │   ├── apb_config.sv
-│   │   ├── apb_driver_base.sv
-│   │   ├── apb_monitor_base.sv
-│   │   ├── apb_agent_base.sv
-│   │   ├── apb_env_base.sv
-│   │   ├── apb_scoreboard_base.sv
-│   │   └── apb_coverage_base.sv
+│   ├── slave/
+│   │   ├── apb_slave_agent.sv
+│   │   ├── apb_slave_driver.sv
+│   │   └── apb_slave_monitor.sv
 │   │
-│   └── master/
-│       ├── apb_master_driver.sv
-│       ├── apb_master_driver_error.sv
-│       ├── apb_master_monitor.sv
-│       ├── apb_master_agent.sv
-│       ├── apb_master_env.sv
-│       ├── apb_master_scoreboard.sv
-│       └── apb_master_coverage.sv
-│   
-├── seq/
-│   └── apb_basic_rw_seq.sv
-│   
-└── test/
-    ├── apb_basic_rw_test.sv
-    └── apb_master_error_test.sv
+│   └── sva/
+│       ├── apb_protocol_sva.sv
+│       └── bind_apb_protocol_sva.sv
+│
+└── README.md
 ```
