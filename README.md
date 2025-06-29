@@ -52,11 +52,18 @@ It is designed to validate both master and slave DUTs by instantiating the corre
 
 ---
 
-<!-- ## 📷 APB Block Diagram
+## 📷 APB Block Diagram
 
-![APB Block Diagram](doc/block_diagram.png)
+### Loopback Test
+![APB Lookback Test Diagram](APB_Lookback.jpg)
 
---- -->
+### Master VIP Test
+![APB Master VIP Test Diagram](APB_MasterVIP.jpg)
+
+### Slave VIP Test
+![APB Slave VIP Test Diagram](APB_SlaveVIP.jpg)
+
+---
 
 ## 📁 Directory Structure
 ```
