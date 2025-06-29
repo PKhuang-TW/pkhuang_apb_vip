@@ -45,12 +45,14 @@ class apb_env extends uvm_env;
     function void connect_phase ( uvm_phase phase );
         super.connect_phase(phase);
 
-        // Master SCB connection
-        agt_mst.mon.port.connect(scb.imp);  // slave mon connection is unnecessary
-        agt_mst.mon.port.connect(fifo.analysis_export);
+        // SCB connection
+        agt_mst.mon.port.connect(scb.imp);
 
         // COV connection - slave mon connection is unnecessary
         agt_mst.mon.port.connect(cov.analysis_export);
+
+        // slave mon -> fifo -> slave seq -> slave driver -> vif
+        agt_slv.mon.port.connect(fifo.analysis_export);
     endfunction
 endclass
 
