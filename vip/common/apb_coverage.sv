@@ -9,6 +9,8 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
     apb_seq_item        txn;
 
     covergroup apb_cg;
+        option.per_instance = 1;
+
         cp_addr:    coverpoint  txn.PADDR { 
             bins addr_bins[] = {[0:`D_MEM_SIZE-1]} with ( (item % `D_DATA_WIDTH) == 0 );
         }
@@ -24,11 +26,9 @@ class apb_coverage extends uvm_subscriber #(apb_seq_item);
     endfunction
     
     virtual function void write ( apb_seq_item t );
-        if ( t.PSEL && t.PENABLE && t.PREADY ) begin  // TXN completes
-            if ( t.PWRITE == 1 ) begin  // collects APB write only
-                txn = t;
-                apb_cg.sample();
-            end
+        if ( t.PSEL && t.PENABLE ) begin  // Access Phase
+            txn = t;
+            apb_cg.sample();
         end
     endfunction
 endclass
